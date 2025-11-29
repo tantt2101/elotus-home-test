@@ -1,0 +1,43 @@
+services:
+  redis:
+    build:
+      context: ./docker/cache
+      dockerfile: Dockerfile
+    container_name: redis-cache
+    restart: always
+    ports:
+      - "6399:6379"
+    volumes:
+      - cache_data:/data
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-your_redis_password}
+    networks:
+      - elotus-network
+
+  mysql:
+    build:
+      context: ./docker/mysql
+      dockerfile: Dockerfile
+    container_name: mysql
+    restart: always
+    ports:
+      - "3406:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-rootpassword}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-git_chat_bot}
+      - MYSQL_USER=${MYSQL_USER:-appuser}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-apppassword}
+    networks:
+      - elotus-network
+
+volumes:
+  cache_data:
+    name: git-chat-bot-redis-data
+  mysql_data:
+    name: git-chat-bot-mysql-data
+
+networks:
+  elotus-network:
+    driver: bridge

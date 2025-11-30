@@ -14,42 +14,32 @@ character-set-server = utf8mb4
 collation-server = utf8mb4_unicode_ci
 
 # InnoDB Settings
-innodb_buffer_pool_size = 1G
-innodb_log_file_size = 256M
+innodb_buffer_pool_size = 512M
+innodb_log_file_size = 128M
 innodb_flush_log_at_trx_commit = 2
 innodb_flush_method = O_DIRECT
 innodb_file_per_table = 1
-innodb_buffer_pool_instances = 4
+innodb_buffer_pool_instances = 2
 
 # Connection Settings
 max_connections = 151
-max_allowed_packet = 16M
+max_allowed_packet = 64M
 thread_cache_size = 8
 thread_stack = 256K
 wait_timeout = 28800
 interactive_timeout = 28800
 
-# Query Cache
-query_cache_type = 1
-query_cache_size = 16M
-query_cache_limit = 1M
+# Logging (let mysql handle default logs)
+slow_query_log = 0
+log_error_verbosity = 2
 
-# Logging
-slow_query_log = 1
-slow_query_log_file = /var/log/mysql/mysql-slow.log
-long_query_time = 2
-log_error = /var/log/mysql/error.log
-
-# Binary Logging
-server-id = 1
-log_bin = /var/log/mysql/mysql-bin.log
-expire_logs_days = 10
-max_binlog_size = 100M
+# Binary Logging (disable unless you need replication)
+skip-log-bin
 
 [client]
 default-character-set = utf8mb4
 socket = /var/run/mysqld/mysqld.sock
 
 [mysql]
-default-character-set = utf8mb4 
+default-character-set = utf8mb4
 socket = /var/run/mysqld/mysqld.sock

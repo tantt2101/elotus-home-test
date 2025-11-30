@@ -1,4 +1,4 @@
-package api
+package utils
 
 import (
 	"encoding/json"
@@ -36,4 +36,18 @@ func Updated(w http.ResponseWriter, message string) {
 		Message: message,
 	}
 	writeJSON(w, http.StatusOK, resp)
+}
+
+func Error(w http.ResponseWriter, message string, status int) {
+	resp := APIResponse{
+		Status: "error",
+		Error:  message,
+	}
+	writeJSON(w, status, resp)
+}
+
+func writeJSON(w http.ResponseWriter, status int, resp APIResponse) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	json.NewEncoder(w).Encode(resp)
 }

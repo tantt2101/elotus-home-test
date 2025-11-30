@@ -5,7 +5,7 @@ import (
 	"errors"
 	"golang.org/x/crypto/bcrypt"
 
-	"elotus-home-test/internal/api/structs"
+	"elotus-home-test/internal/structs"
 )
 
 type UserService struct {

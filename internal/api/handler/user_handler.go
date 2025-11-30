@@ -1,38 +1,36 @@
 package handler
 
 import (
+	"database/sql"
 	"encoding/json"
 	"net/http"
-
-	"elotus-home-test/internal/api/structs"
-	"github.com/go-playground/validator/v10"
-	"golang.org/x/crypto/bcrypt"
+	"elotus-home-test/internal/api/utils"
+	"elotus-home-test/internal/structs"
+	"elotus-home-test/internal/services"
 )
-
-var validate = validator.New()
 
 func RegisterUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		var req structs.RegisterRequest
 		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-			api.Error(w, "Invalid JSON", http.StatusBadRequest)
+			utils.Error(w, "Invalid JSON", http.StatusBadRequest)
 			return
 		}
 
-		if err := validate.Struct(req); err != nil {
-			api.Error(w, err.Error(), http.StatusBadRequest)
+		if err := utils.Validate.Struct(req); err != nil {
+			utils.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
 		userService := services.NewUserService(db)
 
-		createdUser, err := userService.Register(req)
+		createdUser, err := userService.RegisterUser(req)
 		if err != nil {
-			api.Error(w, err.Error(), http.StatusBadRequest)
+			utils.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
-		api.Created(w, "Created successfully", createdUser)
+		utils.Created(w, "Created successfully", createdUser)
 	}
 }

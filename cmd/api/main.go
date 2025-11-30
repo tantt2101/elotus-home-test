@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 	"github.com/joho/godotenv"
-	"elotus-home-test/internal/api"
+	"elotus-home-test/internal/api/router"
 	"elotus-home-test/internal/config"
 )
 
@@ -22,7 +22,7 @@ func main() {
 		return
 	}
 
-	router := api.NewRouter(mysqlDB)
+	router := router.NewRouter(mysqlDB)
 
 	server := &http.Server{
 		Addr:              ":" + port,

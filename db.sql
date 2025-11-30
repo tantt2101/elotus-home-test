@@ -1,0 +1,25 @@
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token TEXT NOT NULL,
+    expires_at DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_token (token(512))
+);
+
+CREATE TABLE media_files (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    filename VARCHAR(255) NOT NULL,
+    content_type VARCHAR(100) NOT NULL,
+    size BIGINT NOT NULL,
+    path VARCHAR(255) NOT NULL,
+    user_id VARCHAR(255),
+    http_json TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);

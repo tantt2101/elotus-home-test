@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"net/http"
 	"elotus-home-test/internal/api/handler"
+    "elotus-home-test/internal/api/middleware"
 )
 
 func NewRouter(db *sql.DB) *http.ServeMux {
@@ -30,6 +31,12 @@ func NewRouter(db *sql.DB) *http.ServeMux {
         }
         handler.Logout(db)(w, r)
     })
+
+    mux.Handle("/api/upload",
+        middleware.AuthMiddleware(db)(
+            http.HandlerFunc(handler.UploadFile(db)),
+        ),
+    )
 
 	return mux
 }

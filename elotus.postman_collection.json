@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "41f1f974-bc1a-496a-bbce-44caf97982b2",
+		"_postman_id": "a6131d3a-703a-44bb-a7ce-53d8de347218",
 		"name": "elotus",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13703285"
@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"usernmae\"\n}",
+					"raw": "{\n    \"username\": \"tantran21012000\",\n    \"password\": \"Noicomdien@123\",\n    \"confirm_password\": \"Noicomdien@123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -27,7 +27,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1/api/user",
+					"raw": "http://127.0.0.1:8080/api/user",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -35,6 +35,7 @@
 						"0",
 						"1"
 					],
+					"port": "8080",
 					"path": [
 						"api",
 						"user"
@@ -56,7 +57,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"usernmae\"\n}",
+					"raw": "{\n    \"username\": \"tantran21012000\",\n    \"password\": \"Noicomdien@123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -64,7 +65,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1/api/user",
+					"raw": "http://127.0.0.1:8080/api/auth/login",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -72,9 +73,11 @@
 						"0",
 						"1"
 					],
+					"port": "8080",
 					"path": [
 						"api",
-						"user"
+						"auth",
+						"login"
 					]
 				}
 			},
@@ -89,6 +92,11 @@
 						"key": "Accept",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjQ0ODYzODIsImlhdCI6MTc2NDQ4Mjc4Mn0.OIQxZhJtRMGJDyKUs0bmRxCqpKdgi7Oum_iy1g-8glwxqx",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -101,7 +109,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1/api/user",
+					"raw": "http://127.0.0.1:8080/api/auth/logout",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -109,9 +117,11 @@
 						"0",
 						"1"
 					],
+					"port": "8080",
 					"path": [
 						"api",
-						"user"
+						"auth",
+						"logout"
 					]
 				}
 			},
